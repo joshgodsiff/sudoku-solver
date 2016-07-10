@@ -102,12 +102,12 @@ which (Just a) (Just b)
 -- Creates a mapping of pure symbols to the sign they're pure under
 -- Quite a bit of room for performance inprovement here.
 gatherSigns :: Clauses -> M.Map Symbol (Maybe Sign)
-gatherSigns clauses = M.unionsWith which asMaps
+gatherSigns clauses = M.fromListWith which asMaps
 	where
 		asMaps = do
 			clause 		<- clauses
 			(sign, sym) <- clause
-			return $ M.singleton sym (Just sign)
+			return (sym, Just sign)
 
 -- Performs unit propagation.
 unitProp :: [Clause] -> Model
