@@ -100,7 +100,6 @@ which (Just a) (Just b)
 	| otherwise = Nothing
 
 -- Creates a mapping of pure symbols to the sign they're pure under
--- Quite a bit of room for performance inprovement here.
 gatherSigns :: Clauses -> M.Map Symbol (Maybe Sign)
 gatherSigns clauses = M.fromListWith which asMaps
 	where
